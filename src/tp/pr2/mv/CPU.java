@@ -42,6 +42,20 @@ public class CPU {
 		return halt;
 	}
 	
+	public int pop_back(){
+		return pilaop.pop_back();
+	}
+	
+	public boolean push_back(int num){
+		return pilaop.push_back(num);
+	}
+	
+	public boolean SaltoPC(int num){
+		if (num <0) return false;
+		else PC = num;
+		return true;
+	}
+	
 	/**
 	 * Este método nos permite ejecutar instrucciones de tipo ByteCode.
 	 * @param instr El ByteCode que se ejecutará.

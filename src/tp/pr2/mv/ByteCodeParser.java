@@ -4,6 +4,14 @@ import tp.pr2.mv.bytecodes.ByteCode;
 import tp.pr2.mv.bytecodes.arithmetics.Add;
 import tp.pr2.mv.bytecodes.arithmetics.Div;
 import tp.pr2.mv.bytecodes.arithmetics.Sub;
+import tp.pr2.mv.bytecodes.arithmetics.Mul;
+import tp.pr2.mv.bytecodes.conditionaljumps.IfEq;
+import tp.pr2.mv.bytecodes.conditionaljumps.IfLe;
+import tp.pr2.mv.bytecodes.conditionaljumps.IfLeq;
+import tp.pr2.mv.bytecodes.conditionaljumps.IfNeq;
+import tp.pr2.mv.bytecodes.Push;
+import tp.pr2.mv.bytecodes.Load;
+import tp.pr2.mv.bytecodes.Store;
 
 
 /**
@@ -13,7 +21,8 @@ import tp.pr2.mv.bytecodes.arithmetics.Sub;
  */
 public class ByteCodeParser {
 	private final static ByteCode[] instrucciones = {
-		new Add(), new Div(), new Sub()
+		new Add(), new Div(), new Sub(), new Mul(), new IfEq(), new IfLe(), 
+		new IfLeq(), new IfNeq(), new Push(), new Load(), new Store()
 		};
 	
 	public static ByteCode parse(String linea){

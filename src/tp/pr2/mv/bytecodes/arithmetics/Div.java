@@ -8,14 +8,26 @@ public class Div extends Arithmetics{
 
 	@Override
 	public boolean execute(CPU cpu) {
-		// TODO Auto-generated method stub
-		return false;
+		int sol=0;int extra = 0; Integer aux = null;
+		aux = cpu.pop_back();
+		if(aux==null)return false;
+		else if (aux == 0) return false;
+		extra = aux;
+		aux = cpu.pop_back();
+		if(aux==null) return false;
+		sol = aux / extra;
+		cpu.push_back(sol);
+		return true;
 	}
 
+	public ByteCode parseAux(String word){
+		if (word.equalsIgnoreCase("DIV")) return new Div();
+		else return null;
+	}
+	
 	@Override
 	public ByteCode parse(String[] words) {
-		// TODO Auto-generated method stub
-		return null;
+		return super.Parse(words);
 	}
 
 }
