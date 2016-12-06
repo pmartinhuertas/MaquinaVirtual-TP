@@ -18,7 +18,7 @@ public class Reset extends Command{
 
 	@Override
 	public String textHelp() {
-		return "RESET: Vacia el programa actual\n";
+		return "RESET: Vacia el programa actual";
 	}
 
 }

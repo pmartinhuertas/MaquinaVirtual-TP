@@ -20,7 +20,7 @@ public class Quit extends Command{
 
 	@Override
 	public String textHelp() {
-		return "QUIT: Cierra la aplicacion\n";
+		return "QUIT: Cierra la aplicacion";
 	}
 
 }

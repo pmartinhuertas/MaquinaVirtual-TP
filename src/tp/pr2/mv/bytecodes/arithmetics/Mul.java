@@ -4,23 +4,22 @@ import tp.pr2.mv.CPU;
 import tp.pr2.mv.bytecodes.Arithmetics;
 import tp.pr2.mv.bytecodes.ByteCode;
 
-public class Add extends Arithmetics{
-	
+public class Mul extends Arithmetics {
 	@Override
 	public boolean execute(CPU cpu) {
 		int sol=0; Integer aux = null;
 		aux = cpu.pop_back();
 		if(aux==null)return false;
-		sol+=aux;
+		sol = aux;
 		aux = cpu.pop_back();
 		if(aux==null) return false;
-		sol+=aux;
+		sol*=aux;
 		cpu.push_back(sol);
 		return true;
 	}
 	
 	public ByteCode parseAux(String word){
-		if (word.equalsIgnoreCase("ADD")) return new Add();
+		if (word.equalsIgnoreCase("Mul")) return new Mul();
 		else return null;
 	}
 
@@ -28,7 +27,4 @@ public class Add extends Arithmetics{
 	public ByteCode parse(String[] words) {
 		return super.Parse(words);
 	}
-
-
-
 }

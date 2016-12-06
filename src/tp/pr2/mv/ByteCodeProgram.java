@@ -31,7 +31,6 @@ public class ByteCodeProgram {
 		this.program = new ByteCode[MAX];
 		this.numInst = 0;
 	}
-	
 	/**
 	 * 
 	 * @param inst Es el ByteCode que le concatenaremos a program después de a última posición ocupada.
@@ -45,7 +44,6 @@ public class ByteCodeProgram {
 			}
 		else return false;
 	}
-	
 	/**
 	 * Nos permite acceder al atributo numInst del objeto.
 	 * @return Devuelve el valor de numInst.

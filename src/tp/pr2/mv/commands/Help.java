@@ -16,7 +16,7 @@ public class Help extends Command{
 	}
 
 	public String textHelp() {
-		return "HELP: Muestra esta ayuda\n";
+		return "HELP: Muestra esta ayuda";
 	}
 	
 }

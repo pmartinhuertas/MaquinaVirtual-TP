@@ -8,14 +8,25 @@ public class Sub extends Arithmetics{
 
 	@Override
 	public boolean execute(CPU cpu) {
-		// TODO Auto-generated method stub
-		return false;
+		int sol=0; Integer aux = null;
+		aux = cpu.pop_back();
+		if(aux==null)return false;
+		sol-=aux;
+		aux = cpu.pop_back();
+		if(aux==null) return false;
+		sol+=aux;
+		cpu.push_back(sol);
+		return true;
 	}
 
+	public ByteCode parseAux(String word){
+		if (word.equalsIgnoreCase("SUB")) return new Sub();
+		else return null;
+	}
+	
 	@Override
 	public ByteCode parse(String[] words) {
-		// TODO Auto-generated method stub
-		return null;
+		return super.Parse(words);
 	}
 
 }
