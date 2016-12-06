@@ -28,10 +28,11 @@ public class CPU {
 	 * Constructor que nos permite crear un objeto de tipo CPU, inicializando halt a false e invocando
 	 * a los constructores de las clases OperandStack y Memory.
 	 */
-	public CPU(){
+	public CPU(ByteCodeProgram program){
 		halt=false;
 		pilaop=new OperandStack();
 		memoria=new Memory();
+		programa=program;
 	}
 	
 	/**
@@ -42,74 +43,131 @@ public class CPU {
 		return halt;
 	}
 	
+	public boolean exeload(int par){
+		if(this.memoria.read(par)==null)this.memoria.write(par, 0);
+		this.pilaop.push_back(this.memoria.read(par));
+		return true;
+	}
+	public boolean exepush(int par){
+		return this.pilaop.push_back(par);
+	}
+	public boolean exestore(int par){
+		this.memoria.write(par, this.pilaop.pop_back());
+		return true;
+	}
+	
+	public boolean run(){
+		for(int ctrl=0;ctrl<this.programa.getnumInst();ctrl++){
+			if(!this.programa.getInstr(ctrl).execute(this))return false;
+		}
+		return true;
+	}
+	
+	public boolean exeAdd(){
+		int sol=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		sol+=aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		sol+=aux;
+		pilaop.push_back(sol);
+		return true;
+	}
+	
+	public boolean exeDiv(){
+		int sol=0;int extra = 0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		else if (aux == 0) return false;
+		extra = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		sol = aux / extra;
+		pilaop.push_back(sol);
+		return true;
+	}
+	
+	public boolean exeMul(){
+		int sol=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		sol = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		sol*=aux;
+		pilaop.push_back(sol);
+		return true;
+	}
+	
+	public boolean exeSub(){
+		int sol=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		sol-=aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		sol+=aux;
+		pilaop.push_back(sol);
+		return true;
+	}
+	
+	public boolean exeIfeq(int num){
+		int aux2=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		aux2 = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		if (aux == aux2) this.SaltoPC(num);
+		return true;
+	}
+	
+	public boolean exeIfle (int num){
+		int aux2=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		aux2 = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		if (aux < aux2) this.SaltoPC(num);
+		return true;
+	}
+	
+	public boolean exeIfleq(int num){
+		int aux2=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		aux2 = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		if (aux <= aux2) this.SaltoPC(num);
+		return true;
+
+	}
+	
+	public boolean exeIfneq(int num){
+		int aux2=0; Integer aux = null;
+		aux = pilaop.pop_back();
+		if(aux==null)return false;
+		aux2 = aux;
+		aux = pilaop.pop_back();
+		if(aux==null) return false;
+		if (aux != aux2) this.SaltoPC(num);
+		return true;
+	}
+
+	private boolean SaltoPC(int num){
+		if (num <0) return false;
+		else PC = num;
+		return true;
+	}
+	
 	/**
 	 * Este método nos permite ejecutar instrucciones de tipo ByteCode.
 	 * @param instr El ByteCode que se ejecutará.
 	 * @return Devolverá cierto si se se ha podido ejecutar la instrucción y falso en otro caso.
 	 */
-	public boolean execute(ByteCode instr){
-		switch(instr.getOp()){
-		case PUSH:{ 
-			if(!this.pilaop.push_back(instr.getPar()))return false;
-			break;
-		}
-		case STORE: {
-			if(pilaop.getNumInt()==0)return false;
-			memoria.write(instr.getPar(), pilaop.pop_back());
-			break;
-		}
-		case LOAD:{
-			if(memoria.read(instr.getPar())==null)return false;
-			pilaop.push_back(memoria.read(instr.getPar()));
-			break;
-		}
-		case ADD:{
-			if(pilaop.getNumInt()<2)return false;
-			int sol=0;
-			sol+=pilaop.pop_back();
-			sol+=pilaop.pop_back();
-			pilaop.push_back(sol);
-			
-			break;
-		}
-		case SUB:{
-			if(pilaop.getNumInt()<2)return false;
-			int sol=0;
-			sol-=pilaop.pop_back();
-			sol+=pilaop.pop_back();
-			pilaop.push_back(sol);
-			break;
-		}
-		case MUL:{
-			if(pilaop.getNumInt()<2)return false;
-			int sol=0;
-			sol=pilaop.pop_back();
-			sol*=pilaop.pop_back();
-			pilaop.push_back(sol);
-			break;
-		}
-		case DIV:{
-			if(pilaop.getNumInt()<2)return false;
-			int sol=0;
-			int aux=pilaop.pop_back();
-			if(aux==0)return false;
-			sol=(pilaop.pop_back()/aux);
-			pilaop.push_back(sol);
-			break;
-		}
-		case OUT:{
-			System.out.println(pilaop.getValor());
-			break;
-		}
-		case HALT:{
-			halt=true;
-			break;
-		}
-		}
-	
-	
-		return true;
-	}
 	
 	public String toString(){
 		StringBuilder cadena = new StringBuilder();
