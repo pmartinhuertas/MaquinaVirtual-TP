@@ -54,6 +54,10 @@ public class Engine {
 	 */
 	public boolean reemplazar(int pos){
 		//Falta!!!
+		String texto="";
+		System.out.println("Introduzca la nueva instruccion");
+		texto=in.nextLine().toUpperCase();
+		ByteCode inst = ByteCodeParser.parse(texto);//esto se hace aqui?
 		if(this.program.replace(inst,pos)) return true;
 		else return false;
 	}
@@ -88,8 +92,12 @@ public class Engine {
 	public boolean readByteCodeProgram(){
 		String linea = "";
 		linea = in.nextLine();
-		while (linea != "END"){
-			//Falta!!!
+		ByteCode inst;
+		while (!linea.equals("END")){
+			linea=this.in.nextLine().toUpperCase();
+			inst=ByteCodeParser.parse(linea);
+			if(inst==null && !linea.equals("END"))System.out.println("No se reconoce la instruccion");
+			else this.program.push_back(inst);
 		}
 		return true;
 	}
@@ -101,7 +109,8 @@ public class Engine {
 	}
 	
 	public boolean run(){
-		
+		CPU cpu=new CPU(this.program);
+		return cpu.run();
 	}
 	/**
 	 * Método que controla el bucle principal de la aplicación.
@@ -114,10 +123,10 @@ public class Engine {
 		Command com= CommandParser.parse(linea);
 		if(com!=null){
 			if(com.execute(this)){
-			if(com.getCommand() == ENUM_COMMAND.NEWINST || 
-				com.getCommand() == ENUM_COMMAND.REPLACE ||
+			/*if(	com.getCommand() == ENUM_COMMAND.REPLACE ||
 				com.getCommand() == ENUM_COMMAND.RESET ||
-				com.getCommand()==ENUM_COMMAND.QUIT)System.out.println(program.toString());}
+				com.getCommand()==ENUM_COMMAND.QUIT)*/
+				System.out.println(program.toString());}
 			else System.out.println("Error: Ejecucion incorrecta del comando");
 		}
 		else System.out.println("Error: El comando introducido no es valido");
@@ -127,11 +136,13 @@ public class Engine {
 			linea=linea.toUpperCase();
 			com= CommandParser.parse(linea);
 			if(com!=null){
-			if(com.execute(this)){
-			if(com.getCommand() == ENUM_COMMAND.NEWINST || 
+			if(com.execute(this))
+			/*{if(com.getCommand() == ENUM_COMMAND.NEWINST || 
 					com.getCommand() == ENUM_COMMAND.REPLACE ||
 					com.getCommand() == ENUM_COMMAND.RESET ||
-					com.getCommand()==ENUM_COMMAND.QUIT)System.out.println(program.toString());}
+					com.getCommand()==ENUM_COMMAND.QUIT)}
+			else*/
+			 System.out.println(program.toString());
 			else System.out.println("Error: Ejecucion incorrecta del comando");
 			}
 			else System.out.println("Error: El comando introducido no es valido");
