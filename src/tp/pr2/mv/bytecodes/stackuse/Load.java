@@ -12,11 +12,17 @@ public class Load extends StackUse{
 	}
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.exeload(this.parametro);
+		if (cpu.readMem(parametro) == null) cpu.writeMem(parametro, 0);
+		cpu.push_back(cpu.readMem(parametro));
+		cpu.sigPC();
+		return true;
 	}
 	@Override
 	public ByteCode parseAux(String word, int par) {
 		if(word.equalsIgnoreCase("LOAD"))return new Load(par);
 		return null;
+	}
+	public String toString(){
+		return "LOAD "+this.parametro;
 	}
 }

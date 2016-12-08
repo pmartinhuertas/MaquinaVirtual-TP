@@ -11,10 +11,17 @@ public class Push extends StackUse{
 	}
 	public Push(){}
 	public boolean execute(CPU cpu) {
-		return cpu.exepush(this.parametro);
+		if(cpu.push_back(parametro)){
+			cpu.sigPC();
+			return true;
+		}
+		else return false;
 	}
 	public ByteCode parseAux(String word, int par) {
 		if(word.equalsIgnoreCase("PUSH"))return new Push(par);
 		return null;
+	}
+	public String toString(){
+		return "PUSH "+this.parametro;
 	}
 }

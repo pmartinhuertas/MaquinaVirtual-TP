@@ -10,4 +10,5 @@ import tp.pr2.mv.CPU;
 public abstract class ByteCode {
 	abstract public boolean execute(CPU cpu);
 	abstract public ByteCode parse(String[] words);
+	//abstract public String toString();
 }

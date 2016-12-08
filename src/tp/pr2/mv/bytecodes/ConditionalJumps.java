@@ -12,8 +12,24 @@ public abstract class ConditionalJumps extends ByteCode{
 		salto = num;
 	}
 	
+	
+	abstract public boolean execute(int op1, int op2);
+	
 	@Override
-	abstract public boolean execute(CPU cpu);
+	public boolean execute(CPU cpu){
+		int op1 = 0; int op2 = 0; Integer aux = null;
+		aux= cpu.pop_back();
+		if(aux==null)return false;
+		op2 = aux;
+		aux = cpu.pop_back();
+		if(aux==null)return false;
+		op1 = aux;
+		if (execute(op1, op2)) {
+			cpu.sigPC();
+			return true;
+		}
+		else return cpu.SaltoPC(this.salto);
+	}
 	
 	
 	abstract public ByteCode parseAux(String word, int salto);
