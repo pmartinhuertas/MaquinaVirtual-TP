@@ -55,6 +55,10 @@ public class CPU {
 		this.memoria.write(par, this.pilaop.pop_back());
 		return true;
 	}
+	public boolean exehalt(){
+		this.halt=true;
+		return true;
+	}
 	
 	public boolean run(){
 		for(int ctrl=0;ctrl<this.programa.getnumInst();ctrl++){

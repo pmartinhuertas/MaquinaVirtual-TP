@@ -91,13 +91,12 @@ public class Engine {
 	
 	public boolean readByteCodeProgram(){
 		String linea = "";
-		linea = in.nextLine();
 		ByteCode inst;
 		while (!linea.equals("END")){
 			linea=this.in.nextLine().toUpperCase();
 			inst=ByteCodeParser.parse(linea);
 			if(inst==null && !linea.equals("END"))System.out.println("No se reconoce la instruccion");
-			else this.program.push_back(inst);
+			else if(!linea.equals("END"))this.program.push_back(inst);
 		}
 		return true;
 	}

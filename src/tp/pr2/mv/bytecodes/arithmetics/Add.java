@@ -20,7 +20,9 @@ public class Add extends Arithmetics{
 	public ByteCode parse(String[] words) {
 		return super.Parse(words);
 	}
-
+	public String toString(){
+		return "ADD";
+	}
 
 
 }

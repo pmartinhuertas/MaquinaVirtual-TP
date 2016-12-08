@@ -18,4 +18,7 @@ public class Store extends StackUse{
 		if(word.equalsIgnoreCase("STORE"))return new Store(par);
 		return null;
 	}
+	public String toString(){
+		return "STORE "+this.parametro;
+	}
 }

@@ -17,4 +17,7 @@ public class Push extends StackUse{
 		if(word.equalsIgnoreCase("PUSH"))return new Push(par);
 		return null;
 	}
+	public String toString(){
+		return "PUSH "+this.parametro;
+	}
 }

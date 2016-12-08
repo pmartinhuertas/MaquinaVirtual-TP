@@ -21,5 +21,8 @@ public class IfLeq extends ConditionalJumps{
 		if (word.equalsIgnoreCase("IFLEQ")) return new IfLeq(salto);
 		else return null;
 	}
+	public String toString(){
+		return "IFLEQ "+this.salto;
+	}
 
 }
