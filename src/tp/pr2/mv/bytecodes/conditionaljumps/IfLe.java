@@ -22,4 +22,7 @@ public class IfLe extends ConditionalJumps{
 		if (word.equalsIgnoreCase("IFLE")) return new IfLe(salto);
 		else return null;
 	}
+	public String toString(){
+		return "IFLE "+this.salto;
+	}
 }

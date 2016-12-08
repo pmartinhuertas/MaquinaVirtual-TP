@@ -21,5 +21,8 @@ public class IfNeq extends ConditionalJumps{
 		if (word.equalsIgnoreCase("IFNEQ")) return new IfNeq(salto);
 		else return null;
 	}
+	public String toString(){
+		return "IFNEQ "+this.salto;
+	}
 
 }

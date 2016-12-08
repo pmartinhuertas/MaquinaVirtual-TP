@@ -46,20 +46,34 @@ public class CPU {
 	public boolean exeload(int par){
 		if(this.memoria.read(par)==null)this.memoria.write(par, 0);
 		this.pilaop.push_back(this.memoria.read(par));
+		this.PC++;
 		return true;
 	}
 	public boolean exepush(int par){
-		return this.pilaop.push_back(par);
+		if(this.pilaop.push_back(par)){
+			this.PC++;	
+			return true;
+		}
+		else return false;
 	}
 	public boolean exestore(int par){
 		this.memoria.write(par, this.pilaop.pop_back());
+		this.PC++;
+		return true;
+	}
+	public boolean exehalt(){
+		this.halt=true;
 		return true;
 	}
 	
 	public boolean run(){
-		for(int ctrl=0;ctrl<this.programa.getnumInst();ctrl++){
-			if(!this.programa.getInstr(ctrl).execute(this))return false;
+		boolean fallo=false;
+		while(this.halt==false&&!fallo){
+			if(!this.programa.getInstr(this.PC).execute(this))return false;
 		}
+		//for(int ctrl=0;ctrl<this.programa.getnumInst();ctrl++){
+		//	if(!this.programa.getInstr(ctrl).execute(this))return false;
+		//}
 		return true;
 	}
 	
@@ -72,6 +86,7 @@ public class CPU {
 		if(aux==null) return false;
 		sol+=aux;
 		pilaop.push_back(sol);
+		this.PC++;
 		return true;
 	}
 	
@@ -85,6 +100,7 @@ public class CPU {
 		if(aux==null) return false;
 		sol = aux / extra;
 		pilaop.push_back(sol);
+		this.PC++;
 		return true;
 	}
 	
@@ -120,6 +136,7 @@ public class CPU {
 		aux = pilaop.pop_back();
 		if(aux==null) return false;
 		if (aux == aux2) this.SaltoPC(num);
+		this.PC++;
 		return true;
 	}
 	

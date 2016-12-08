@@ -10,12 +10,13 @@ public class Store extends StackUse{
 	}	
 	public Store(){}
 	public boolean execute(CPU cpu) {
-		
-		
 		return true;
 	}
 	public ByteCode parseAux(String word, int par) {
-		if(word.equalsIgnoreCase("STORE"))return new Store(par);
+		if(word.equalsIgnoreCase("STORE")&&par>=0)return new Store(par);
 		return null;
+	}
+	public String toString(){
+		return "STORE "+this.parametro;
 	}
 }

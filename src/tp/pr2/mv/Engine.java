@@ -91,13 +91,12 @@ public class Engine {
 	
 	public boolean readByteCodeProgram(){
 		String linea = "";
-		linea = in.nextLine();
 		ByteCode inst;
 		while (!linea.equals("END")){
 			linea=this.in.nextLine().toUpperCase();
 			inst=ByteCodeParser.parse(linea);
 			if(inst==null && !linea.equals("END"))System.out.println("No se reconoce la instruccion");
-			else this.program.push_back(inst);
+			else if(!linea.equals("END"))this.program.push_back(inst);
 		}
 		return true;
 	}
@@ -109,8 +108,16 @@ public class Engine {
 	}
 	
 	public boolean run(){
+		System.out.println("Comienza la ejecucion de run");
 		CPU cpu=new CPU(this.program);
-		return cpu.run();
+		if(cpu.run()){
+			System.out.println(cpu.toString());
+			return true;
+		}
+		else {
+			System.out.println("Error de ejecucion");
+			return false;
+		}
 	}
 	/**
 	 * Método que controla el bucle principal de la aplicación.

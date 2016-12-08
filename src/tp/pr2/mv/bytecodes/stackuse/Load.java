@@ -19,4 +19,7 @@ public class Load extends StackUse{
 		if(word.equalsIgnoreCase("LOAD"))return new Load(par);
 		return null;
 	}
+	public String toString(){
+		return "LOAD "+this.parametro;
+	}
 }

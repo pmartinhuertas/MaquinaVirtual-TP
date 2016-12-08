@@ -23,5 +23,7 @@ public class IfEq extends ConditionalJumps{
 		if (word.equalsIgnoreCase("IFEQ")) return new IfEq(salto);
 		else return null;
 	}
-
+	public String toString(){
+		return "IFEQ "+this.salto;
+	}
 }

@@ -12,6 +12,4 @@ public abstract class Arithmetics extends ByteCode{
 		if(words.length !=1) return null;
 		else return this.parseAux(words[0]);
 	}
-	
-
 }
