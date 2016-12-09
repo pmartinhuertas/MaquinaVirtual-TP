@@ -1,6 +1,7 @@
 package tp.pr2.mv;
 
 import tp.pr2.mv.bytecodes.ByteCode;
+import tp.pr2.mv.bytecodes.Goto;
 import tp.pr2.mv.bytecodes.Halt;
 import tp.pr2.mv.bytecodes.arithmetics.Add;
 import tp.pr2.mv.bytecodes.arithmetics.Div;
@@ -24,7 +25,8 @@ import tp.pr2.mv.bytecodes.stackuse.Store;
 public class ByteCodeParser {
 	private final static ByteCode[] instrucciones = {
 		new Add(), new Div(), new Sub(), new Mul(), new IfEq(), new IfLe(), 
-		new IfLeq(), new IfNeq(), new Push(), new Load(), new Store(), new Halt()
+		new IfLeq(), new IfNeq(), new Push(), new Load(), new Store(), new Halt(),
+		new Goto()
 		};
 	
 	public static ByteCode parse(String linea){

@@ -68,7 +68,7 @@ public class ByteCodeProgram {
 	 * @return Devuelve cierto si se ha podido realizar la operación y falso en otro caso.
 	 */
 	public boolean replace(ByteCode inst, int pos){
-		if (pos >= numInst) return false;
+		if (pos >= numInst||pos<0) return false;
 		else {
 			program[pos] = inst;
 			return true;

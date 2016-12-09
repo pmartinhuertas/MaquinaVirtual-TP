@@ -60,9 +60,14 @@ public class OperandStack {
 	 * Saca de la pila el valor de su cima.
 	 * @return Devuelve la cima de la pila.
 	 */
-	public int pop_back(){
+	public Integer pop_back(){
 		--numInt;
-		return stack[numInt];
+		if (numInt<0){
+			numInt=0;
+			return null;
+		}
+		else return stack[numInt];//al parecer se pueden tratar 
+		//los enteros como integer
 	}
 	/**
 	 * Reddefinimos el toString de OperandStack para que nos muestre información sobre la pila de operandos.
