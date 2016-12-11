@@ -53,11 +53,14 @@ public class Engine {
 	 * @return Devuelve cierto si se ha podido reemplazar y falso en otro caso.
 	 */
 	public boolean reemplazar(int pos){
-		//Falta!!!
 		String texto="";
 		System.out.println("Introduzca la nueva instruccion");
 		texto=in.nextLine().toUpperCase();
-		ByteCode inst = ByteCodeParser.parse(texto);//esto se hace aqui?
+		ByteCode inst = ByteCodeParser.parse(texto);
+		if(inst==null){
+			System.out.println("No se reconoce la instruccion");
+			return false;
+		}
 		if(this.program.replace(inst,pos)) return true;
 		else return false;
 	}
@@ -129,11 +132,7 @@ public class Engine {
 		linea=linea.toUpperCase();
 		Command com= CommandParser.parse(linea);
 		if(com!=null){
-			if(com.execute(this)){
-			/*if(	com.getCommand() == ENUM_COMMAND.REPLACE ||
-				com.getCommand() == ENUM_COMMAND.RESET ||
-				com.getCommand()==ENUM_COMMAND.QUIT)*/
-				System.out.println(program.toString());}
+			if(com.execute(this))	System.out.println(program.toString());
 			else System.out.println("Error: Ejecucion incorrecta del comando");
 		}
 		else System.out.println("Error: El comando introducido no es valido");
@@ -143,13 +142,7 @@ public class Engine {
 			linea=linea.toUpperCase();
 			com= CommandParser.parse(linea);
 			if(com!=null){
-			if(com.execute(this))
-			/*{if(com.getCommand() == ENUM_COMMAND.NEWINST || 
-					com.getCommand() == ENUM_COMMAND.REPLACE ||
-					com.getCommand() == ENUM_COMMAND.RESET ||
-					com.getCommand()==ENUM_COMMAND.QUIT)}
-			else*/
-			 System.out.println(program.toString());
+			if(com.execute(this))	System.out.println(program.toString());
 			else System.out.println("Error: Ejecucion incorrecta del comando");
 			}
 			else System.out.println("Error: El comando introducido no es valido");

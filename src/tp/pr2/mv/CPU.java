@@ -49,12 +49,12 @@ public class CPU {
 	public boolean run(){
 		boolean fallo=false;
 		while(this.halt==false&&!fallo){
-			if(!this.programa.getInstr(this.PC).execute(this))return false;
+			if(!this.programa.getInstr(this.PC).execute(this))fallo =true;
 		}
 		//for(int ctrl=0;ctrl<this.programa.getnumInst();ctrl++){
 		//	if(!this.programa.getInstr(ctrl).execute(this))return false;
 		//}
-		return true;
+		return !fallo;
 	}
 	
 	public Integer readMem(int n){
@@ -64,7 +64,7 @@ public class CPU {
 		memoria.write(par, n);
 	}
 	
-	public int pop_back(){
+	public Integer pop_back(){
 		return pilaop.pop_back();
 	}
 	
@@ -77,7 +77,7 @@ public class CPU {
 	}
 
 	public boolean SaltoPC(int num){
-		if (num <0) return false;
+		if (num <0 || num>=this.programa.getnumInst()) return false;
 		else PC = num;
 		return true;
 	}
