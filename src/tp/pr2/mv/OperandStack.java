@@ -66,11 +66,10 @@ public class OperandStack {
 			numInt=0;
 			return null;
 		}
-		else return stack[numInt];//al parecer se pueden tratar 
-		//los enteros como integer
+		else return stack[numInt];
 	}
 	/**
-	 * Reddefinimos el toString de OperandStack para que nos muestre información sobre la pila de operandos.
+	 * Redefinimos el toString de OperandStack para que nos muestre información sobre la pila de operandos.
 	 */
 	public String toString(){
 		StringBuilder cadena = new StringBuilder();

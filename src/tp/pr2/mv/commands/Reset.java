@@ -20,5 +20,7 @@ public class Reset extends Command{
 	public String textHelp() {
 		return "RESET: Vacia el programa actual";
 	}
-
+	public String toString(){
+		return "RESET";
+		}
 }

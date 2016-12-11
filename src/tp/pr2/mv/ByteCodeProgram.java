@@ -32,7 +32,7 @@ public class ByteCodeProgram {
 		this.numInst = 0;
 	}
 	/**
-	 * 
+	 * Inserta una instruccion en el programa.
 	 * @param inst Es el ByteCode que le concatenaremos a program después de a última posición ocupada.
 	 * @return Devolverá cierto si caben mas instrucciones en program y falso en otro caso.
 	 */
@@ -45,7 +45,7 @@ public class ByteCodeProgram {
 		else return false;
 	}
 	/**
-	 * Nos permite acceder al atributo numInst del objeto.
+	 * Nos permite acceder al atributo numInst del objeto externamente.
 	 * @return Devuelve el valor de numInst.
 	 */
 	public int getnumInst(){

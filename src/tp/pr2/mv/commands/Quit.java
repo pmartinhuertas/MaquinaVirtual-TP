@@ -18,7 +18,10 @@ public class Quit extends Command{
 
 	}
 
-	@Override
+	public String toString(){
+		return "QUIT";
+		}
+	
 	public String textHelp() {
 		return "QUIT: Cierra la aplicacion";
 	}
