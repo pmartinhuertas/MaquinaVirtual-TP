@@ -6,7 +6,8 @@ public class Halt extends ByteCode{
 
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.exehalt();
+		cpu.setHalt(true);
+		return true;
 	}
 
 	@Override

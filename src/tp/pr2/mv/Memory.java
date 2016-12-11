@@ -66,7 +66,8 @@ public class Memory {
 	}
 	
 	/**
-	 * Redefinimos el método toString de Memory, para que nos muestre información sobre el estado de la memoria.
+	 * Redefinimos el método toString de Memory, para que nos
+	 *  muestre información sobre el estado de la memoria.
 	 */
 	public String toString(){
 		StringBuilder cadena = new StringBuilder();

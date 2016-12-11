@@ -23,12 +23,22 @@ import tp.pr2.mv.bytecodes.stackuse.Store;
  *
  */
 public class ByteCodeParser {
+	
+	/**
+	 * Un array con los distintos tipos de bytecodes
+	 */
 	private final static ByteCode[] instrucciones = {
 		new Add(), new Div(), new Sub(), new Mul(), new IfEq(), new IfLe(), 
 		new IfLeq(), new IfNeq(), new Push(), new Load(), new Store(), new Halt(),
 		new Goto()
 		};
 	
+	/**
+	 * 
+	 * @param String que se va a parsear.
+	 * @return Devuelve la instruccion que se ha obtenido de linea, o 
+	 * null si no se ha reconocido nada.
+	 */
 	public static ByteCode parse(String linea){
 		String[] words=linea.split(" ");
 		ByteCode instruccion = null;

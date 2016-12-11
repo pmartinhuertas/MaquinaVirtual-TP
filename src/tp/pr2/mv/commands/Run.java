@@ -21,5 +21,7 @@ public class Run extends Command{
 	public String textHelp() {
 		return "RUN: ejecuta el programa almacenado";
 	}
-
+	public String toString(){
+		return "RUN";
+		}
 }

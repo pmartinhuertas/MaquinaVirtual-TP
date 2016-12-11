@@ -64,34 +64,32 @@ public class Engine {
 		if(this.program.replace(inst,pos)) return true;
 		else return false;
 	}
-	/*
-	public boolean replace(Command comando){
-		System.out.println("Comienza la ejecución de REPLACE");
-		if(comando.getReplace()==null)return false;
-		System.out.println("Introduzca una instruccion");
-		Scanner cin = new Scanner(System.in);
-		String linea="NEWINST ";
-		linea+=cin.nextLine().toUpperCase();
-		String subcads[]= linea.split(" ");
-		ByteCode inst = ByteCodeParser.parse(subcads);
-		cin.close();
-		if(!reemplazar(inst, comando.getReplace())) {
-			System.out.println("No se ha podido realizar el reemplazamiento.");
-			return false;
-			}
-		return true;
-	}*/
+	/**
+	 * Finaliza el programa.
+	 * @return Devuelve siempre verdadero porque siempre se puede realizar 
+	 * esta operación.
+	 */
 	public boolean quit(){
 		System.out.println("Comienza la ejecución de QUIT");
 		end=true;
 		return true;
 	}
-	
+	/**
+	 * Muestra para que sirve para comando.
+	 * @return Devuelve siempre verdadero porque siempre se puede realizar 
+	 * esta operación.
+	 */
 	public boolean help(){
 		CommandParser.showHelp();
 		return true;
 	}
 	
+	/**
+	 * Pide al usuario que introduzca todas las instrucciones
+	 * que componen el programa.
+	 * @return Devuelve siempre verdadero porque siempre se puede realizar 
+	 * esta operación.
+	 */
 	public boolean readByteCodeProgram(){
 		String linea = "";
 		ByteCode inst;
@@ -104,12 +102,21 @@ public class Engine {
 		return true;
 	}
 	
+	/**
+	 * Borra el contenido del atributo program.
+	 * @return
+	 */
 	public boolean resetProgram(){
 		System.out.println("Comienza la ejecución de RESET");
 		this.program = new ByteCodeProgram();
 		return true;
 	}
 	
+	/**
+	 * Ejecuta el programa almacenado.
+	 * @return Devuelve true si se ejecutan todas las instrucciones o
+	 * false si hay alguna que falla.
+	 */
 	public boolean run(){
 		System.out.println("Comienza la ejecucion de run");
 		CPU cpu=new CPU(this.program);
@@ -122,6 +129,7 @@ public class Engine {
 			return false;
 		}
 	}
+	
 	/**
 	 * Método que controla el bucle principal de la aplicación.
 	 */

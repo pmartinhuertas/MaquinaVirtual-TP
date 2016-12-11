@@ -19,4 +19,7 @@ public class Help extends Command{
 		return "HELP: Muestra esta ayuda";
 	}
 	
+	public String toString(){
+		return "HELP";
+		}
 }
